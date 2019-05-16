@@ -1,15 +1,15 @@
 import config
 import sys
 
+from src.average import ARITHMETIC, HARMONIC_WEIGHTED, GEOMETRIC_WEIGHTED
 from src.sentiment import SentimentAnalysis
-
 
 
 class App:
 
     def __init__(self):
         self.dictionary_path = config.DICTIONARY_PATH
-        self.analyser = SentimentAnalysis(config.DICTIONARY_PATH)
+        self.analyser = SentimentAnalysis(config.DICTIONARY_PATH, GEOMETRIC_WEIGHTED)
 
     def routes(self):
         return (
@@ -18,10 +18,10 @@ class App:
         )
 
     def analyse_single(self):
-        text = input("Print your text (en) here : ")
+        text = input("Введите текст: ")
         result = self.analyser.score(text)
 
-        formatted_output = "The result from -1 to 1 is : {}".format(result)
+        formatted_output = "Оценка : {}".format(result)
         print(formatted_output)
         print("\n")
         self.run()
@@ -30,14 +30,14 @@ class App:
         print("future file analysis")
 
     def run(self):
-        print("That do you suppose to do?")
-        print("[0] - input single phrase")
-        print("[1] - analyse file")
-        print("[:q] - exit")
+        print("Что делаем?")
+        print("[0] - посчитать эмоциональную окраску одной фразы")
+        print("[1] - посчитать эмоциональную окраску текста (файл)")
+        print("[:q] - выйти")
 
-        action = None
+        action = 0
         while action not in ('0', '1'):
-            action = input("Select option: ")
+            action = input("Опция: ")
             if action in ('q', ':q', 'quit'):
                 sys.exit(1)
 
