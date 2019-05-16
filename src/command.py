@@ -3,13 +3,14 @@ import sys
 
 from src.average import ARITHMETIC, HARMONIC_WEIGHTED, GEOMETRIC_WEIGHTED
 from src.sentiment import SentimentAnalysis
-
+from src.translator import GoogleTranslator
 
 class App:
 
     def __init__(self):
         self.dictionary_path = config.DICTIONARY_PATH
         self.analyser = SentimentAnalysis(config.DICTIONARY_PATH, GEOMETRIC_WEIGHTED)
+        self.translator = GoogleTranslator()
 
     def routes(self):
         return (
@@ -19,6 +20,9 @@ class App:
 
     def analyse_single(self):
         text = input("Введите текст: ")
+
+        print("Перевод текста в английский язык")
+        text = self.translator.translate(text)
         result = self.analyser.score(text)
 
         formatted_output = "Оценка : {}".format(result)
