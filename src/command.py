@@ -23,7 +23,7 @@ class App:
 
     def analyse_single(self):
         text = input("Введите текст : ")
-        text = input("Введите текст : ")
+
         rates = []
         for chunk in self.parser.build_chunks(text):
             translated = self.translator.translate(str(chunk))
