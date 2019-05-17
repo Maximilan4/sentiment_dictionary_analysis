@@ -1,7 +1,9 @@
 import nltk
 import re
 
+from typing import Iterable
 from src import average
+from src.parser import TextChunk
 
 
 class SentimentAnalysis(object):
@@ -72,7 +74,7 @@ class SentimentAnalysis(object):
                 self.swn_all[word] = average.harmonic_weighted(newlist)
 
     def pos_short(self, pos):
-        """Конвертим тег NLTK Pв корректный формат"""
+        """Конвертим тег NLTK в корректный формат"""
         if pos in set(['VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ']):
             return 'v'
         elif pos in set(['JJ', 'JJR', 'JJS']):
@@ -93,6 +95,14 @@ class SentimentAnalysis(object):
                 return self.swn_all[word]
             except KeyError:
                 return 0
+
+    def score_chunk(self, chunk: TextChunk):
+        """Получаем эмоциональную окраску одного куска текста (оценивается каждое предложение)"""
+        rates = []
+        for sentence in chunk.sentences:
+            rates.append(self.score(sentence))
+
+        return average.arithmetic(rates)
 
     def score(self, sentence):
         """Получаем эмоциональную окраску предложения"""

@@ -1,9 +1,10 @@
 from googletrans import Translator, constants
+from src import TEXT_CHUNK_SIZE
 
 
 class GoogleTranslator(Translator):
 
-    CHARACTER_LIMIT = 15000
+    CHARACTER_LIMIT = TEXT_CHUNK_SIZE
 
     def __init__(self, service_urls=None, user_agent=constants.DEFAULT_USER_AGENT,
                  proxies=None, timeout=None):
