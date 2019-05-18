@@ -15,7 +15,7 @@ class TextParser:
         if not path.is_file():
             return False
 
-        with open(str(path), 'r') as lines:
+        with open(file=str(path), mode='r', encoding='utf-8') as lines:
             for line in lines:
                 text.append(line)
 
