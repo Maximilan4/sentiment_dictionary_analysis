@@ -1,5 +1,6 @@
 import nltk
 import re
+import io
 from src import TEXT_CHUNK_SIZE
 from nltk.tokenize import sent_tokenize
 from pathlib import Path
@@ -10,16 +11,12 @@ class TextParser:
     def parse_file(self, path):
         """Считываем текст из файла"""
         path = Path(path)
-        text = []
 
         if not path.is_file():
             return False
 
-        with open(file=str(path), mode='r', encoding='utf-8') as lines:
-            for line in lines:
-                text.append(line)
-
-        return ''.join(text)
+        with io.open(file=str(path), mode='r', encoding='utf8') as file:
+            return file.read()
 
     def build_chunks_from_file(self, path):
         text = self.parse_file(path)
