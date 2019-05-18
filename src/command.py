@@ -23,7 +23,6 @@ class App:
 
     def analyse_single(self):
         text = input("Введите текст : ")
-
         rates = []
         for chunk in self.parser.build_chunks(text):
             translated = self.translator.translate(str(chunk))
@@ -37,12 +36,23 @@ class App:
         self.run()
 
     def analyse_file(self):
-        print("future file analysis")
+        file_path = input('Введите путь до файла: ')
+        rates = []
+        for chunk in self.parser.build_chunks_from_file(file_path):
+            translated = self.translator.translate(str(chunk))
+            en_chunk = TextChunk.from_text(translated)
+            rates.append(self.analyser.score_chunk(en_chunk))
+
+        rate = arithmetic(rates)
+        formatted_output = "Оценка : {}".format(rate)
+        print(formatted_output)
+        print("\n")
+        self.run()
 
     def run(self):
         print("Что делаем?")
-        print("[0] - посчитать эмоциональную окраску одной фразы")
-        print("[1] - посчитать эмоциональную окраску текста (файл)")
+        print("[0] - посчитать эмоциональную окраску введенного текста")
+        print("[1] - посчитать эмоциональную окраску текста в файле")
         print("[:q] - выйти")
 
         action = 0

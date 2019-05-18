@@ -16,7 +16,7 @@ class GoogleTranslator(Translator):
         if len(text) > self.CHARACTER_LIMIT:
             raise CharacterLimitException()
 
-        detection = self.detect(text)
+        detection = self.detect(text[0:100])
         if detection.lang == self.default_language:
             print("Перевод не требуется")
             return text

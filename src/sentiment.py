@@ -1,7 +1,6 @@
 import nltk
 import re
 
-from typing import Iterable
 from src import average
 from src.parser import TextChunk
 
