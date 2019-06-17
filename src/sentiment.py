@@ -149,7 +149,7 @@ class SentimentAnalysis(object):
                     word = '_'.join(word_minus_one)
                     pos = 'unknown'
 
-                # perform lookup
+                # Получение конкретной оценки из SentiWordNet
                 if (pos in self.impt) and (word not in stopwords):
                     if pos in self.non_base:
                         word = wnl.lemmatize(word, self.pos_short(pos))
