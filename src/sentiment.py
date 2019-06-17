@@ -9,7 +9,7 @@ class SentimentAnalysis(object):
 
     def __init__(self, filename, weighting='geometric'):
         """Проверка правильности выбора механизма подсчета среднего значения"""
-        if weighting not in ('geometric', 'harmonic', 'average'):
+        if weighting not in ('geometric', 'harmonic', 'arithmetic'):
             raise ValueError(
                 'Allowed weighting options are geometric, harmonic, average')
         # конвертируем файл словаря во внутренние типы, для удобства работы
@@ -53,7 +53,7 @@ class SentimentAnalysis(object):
             for word in self.swn_pos[pos].keys():
                 # через генераторное выражение, заполняем список коэфициентов, учитывая чувствительность (ключ словаря)
                 newlist = [self.swn_pos[pos][word][k] for k in sorted(
-                    self.swn_pos[pos][word].keys())]
+                    self.swn_pos[pos][word].keys(), reverse=True)]
                 if weighting == average.ARITHMETIC:
                     self.swn_pos[pos][word] = average.arithmetic(newlist)
                 if weighting == average.GEOMETRIC_WEIGHTED:
