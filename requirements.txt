@@ -10,7 +10,7 @@ matplotlib==3.0.2
 nltk==3.4.1
 numpy==1.16.1
 pandas==0.24.1
-Pillow==5.4.1
+Pillow==8.2.0
 pyaes==1.6.1
 pyasn1==0.4.5
 pyparsing==2.3.1
